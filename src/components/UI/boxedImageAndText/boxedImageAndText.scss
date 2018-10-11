@@ -1,0 +1,36 @@
+.boxedImageAndText {
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	z-index: 5;
+
+	@media (min-width: 768px) {
+		flex-direction: row;
+	}
+}
+
+.text {
+	display: flex;
+	width: 100%;
+	padding: 30px;
+	align-items: center;
+	height: auto;
+	min-height: 450px;
+
+	p {
+		font-size: 1.4rem;
+		line-height: 1.8rem;
+	}
+
+	@media (min-width: 768px) {
+		width: 500px;
+		height: 450px;
+	}
+}
+
+.image {
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+}

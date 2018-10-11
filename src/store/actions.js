@@ -1,0 +1,1 @@
+export const GET_WORK = 'GET_WORK';

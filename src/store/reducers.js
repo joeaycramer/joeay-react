@@ -7,8 +7,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 	switch(action.type) {
 		case actionTypes.GET_WORK:
-			// if 
-			console.log('its the work action');
 			return {
 				...state,
 				portfolioItems: action.payload

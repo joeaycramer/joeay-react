@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import axios from 'axios';
 import Home from '../../components/pages/Home';
 import Work from '../../components/pages/Work';
@@ -18,7 +19,6 @@ class Main extends Component {
       this.getPortfolioItems();
     }
   }
-
 
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -72,4 +72,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStatesToProps, mapDispatchToProps)(Main);
+export default withRouter(
+                          connect(mapStatesToProps, mapDispatchToProps)(Main)
+                          );

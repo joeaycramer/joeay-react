@@ -9,13 +9,15 @@ const PortfolioGrid = (props) => {
 		);
 
 	if (props.items.length > 0) {
+    
 		items = props.items.map(item => {
+      console.log('grid', item.data);
 			return <PortfolioItem
-							key={item.id}
-							title={item.title.rendered}
-							color={item.acf['brand-colors']}
-							link={item.link}
-							image={item.acf.thumbnail} />
+							key={item.uid}
+							title={item.data.thumbnail_title}
+							color={item.data.thumbnail_colour}
+							link={item.uid}
+							image={item.data.thumbnail_image.url} />
 		});
 	}
 

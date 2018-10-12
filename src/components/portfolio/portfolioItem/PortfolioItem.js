@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Aux from '../../../hoc/Aux';
 import c from './PortfolioItem.scss';
 
@@ -15,12 +16,15 @@ const PortfolioItem = (props) => {
 	return (
 		<Aux>
 			<div className={c.item}>
-				<div className={c.colorOverlay} style={{backgroundColor: props.color }}></div>
-				<div className={c.image} style={{backgroundImage: `url(${props.image})`}}></div>
-				<div className={c.title}>
-					{title}
-				</div>
+				<Link to={props.link}>
+					<div className={c.colorOverlay} style={{backgroundColor: props.color }}></div>
+					<div className={c.image} style={{backgroundImage: `url(${props.image})`}}></div>
+					<div className={c.title}>
+						{title}
+					</div>
+				</Link>
 			</div>
+
 		</Aux>
 		)
 }

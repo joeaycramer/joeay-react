@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import axios from 'axios';
+import Prismic from 'prismic-javascript';
 import Home from '../../components/pages/Home';
 import Work from '../../components/pages/Work';
 import Contact from '../../components/pages/Contact';
@@ -21,18 +22,28 @@ class Main extends Component {
   }
 
 
-  shouldComponentUpdate = (nextProps, nextState) => {
-      return true;
-  }
+  // shouldComponentUpdate = (nextProps, nextState) => {
+  //     return true;
+  // }
 
   componentDidUpdate = prevProps => {
     window.scrollTo(0, 0);
   }
 
+
+
+
   // get base portfolio items
   getPortfolioItems = () => {
-    axios.get('/wp/v2/work').then(items => {
-      this.props.get_work(items.data);
+    const apiEndpoint = 'https://joeaycouk.cdn.prismic.io/api/v2';
+ 
+    Prismic.api(apiEndpoint).then(api => {
+      api.query(
+        Prismic.Predicates.at('document.type', 'portfolio'),
+        { fetch : ['portfolio.thumbnail_title', 'portfolio.thumbnail_image', 'portfolio.thumbnail_colour'] }
+      ).then(response => {
+        this.props.get_work(response.results);
+      });
     });
   }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import Aux from '../../../hoc/Aux';
 import c from './PortfolioGrid.scss';
 import Loader from '../../UI/loader/Loader';
 import PortfolioItem from '../portfolioItem/PortfolioItem';

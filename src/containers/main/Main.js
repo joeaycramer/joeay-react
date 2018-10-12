@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import Home from '../../components/pages/Home';
 import Work from '../../components/pages/Work';
@@ -19,76 +19,42 @@ class Main extends Component {
     }
   }
 
-  shallowEqual = (objA, objB) => {
-    if (objA === objB) {
-      return true;
-    }
 
-    if (typeof objA !== 'object' || objA === null ||
-        typeof objB !== 'object' || objB === null) {
-      return false;
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+
   }
 
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-
-  if (keysA.length !== keysB.length) {
-    return false;
+  componentDidUpdate = prevProps => {
+    window.scrollTo(0, 0);
   }
 
-  // Test for A's keys different from B.
-  var bHasOwnProperty = hasOwnProperty.bind(objB);
-  for (var i = 0; i < keysA.length; i++) {
-    if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
-      return false;
-    }
+  // get base portfolio items
+  getPortfolioItems = () => {
+    axios.get('/wp/v2/work').then(items => {
+      this.props.get_work(items.data);
+    });
   }
 
-  return true;
-}
 
-shallowCompare = (nextProps, nextState) => {
-  return (
-          !this.shallowEqual(this.props, nextProps) ||
-          !this.shallowEqual(this.state, nextState)
-          );
-}
+  render() {
+    return (
+            <main className={c.main}>
+            <div className={c_l.container}>
 
+            <Switch>
+            <Route path="/work" exact render={(props) => (
+              <Work {...props} items={this.props.work} />
+              )}/>
+            <Route path="/contact" exact component={Contact} />
+            <Route path="/" exact render={(props) => (
+              <Home {...props} items={this.props.work} />
+              )}/>
+            </Switch>
 
-shouldComponentUpdate = (nextProps, nextState) => {
-
-}
-
-componentDidUpdate = prevProps => {
-  window.scrollTo(0, 0);
-}
-
-// get base portfolio items
-getPortfolioItems = () => {
-axios.get('/wp/v2/work').then(items => { // getting all work
-this.props.get_work(items.data); // dispatches action
-});
-}
-
-
-render() {
-  return (
-          <main className={c.main}>
-          <div className={c_l.container}>
-
-          <Switch>
-          <Route path="/work" exact render={(props) => (
-            <Work {...props} items={this.props.work} />
-            )}/>
-          <Route path="/contact" exact component={Contact} />
-          <Route path="/" exact render={(props) => (
-            <Home {...props} items={this.props.work} />
-            )}/>
-          </Switch>
-
-          </div>
-          </main>
-          );
+            </div>
+            </main>
+            );
   }
 }
 
@@ -106,6 +72,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(
-                          connect(mapStatesToProps, mapDispatchToProps)(Main)
-                          );
+export default connect(mapStatesToProps, mapDispatchToProps)(Main);

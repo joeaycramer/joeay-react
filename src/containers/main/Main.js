@@ -22,7 +22,7 @@ class Main extends Component {
 
 
   shouldComponentUpdate = (nextProps, nextState) => {
-
+      return true;
   }
 
   componentDidUpdate = prevProps => {

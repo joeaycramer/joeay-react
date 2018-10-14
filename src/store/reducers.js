@@ -5,8 +5,9 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+
 	switch(action.type) {
-		case actionTypes.GET_WORK:
+		case actionTypes.UPDATE_WORK:
 			return {
 				...state,
 				portfolioItems: action.payload

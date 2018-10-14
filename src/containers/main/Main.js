@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import axios from 'axios';
 import Prismic from 'prismic-javascript';
 import Home from '../../components/pages/Home';
 import Work from '../../components/pages/Work';
+import WorkItem from '../../components/pages/WorkItem';
 import Contact from '../../components/pages/Contact';
 
 import { connect } from 'react-redux';
@@ -39,13 +39,34 @@ class Main extends Component {
  
     Prismic.api(apiEndpoint).then(api => {
       api.query(
-        Prismic.Predicates.at('document.type', 'portfolio'),
-        { fetch : ['portfolio.thumbnail_title', 'portfolio.thumbnail_image', 'portfolio.thumbnail_colour'] }
+        Prismic.Predicates.at('document.type', 'portfolio'), {
+          fetch : [
+            'portfolio.thumbnail_title',
+            'portfolio.thumbnail_image',
+            'portfolio.thumbnail_colour'
+          ],
+          orderings : '[my.portfolio.date_completed desc]'
+        }
       ).then(response => {
-        this.props.get_work(response.results);
+        const items = [];
+
+        response.results.map(item => {
+          items.push({
+                slug: item.uid,
+                thumbnail_title: item.data.thumbnail_title,
+                thumbnail_image: item.data.thumbnail_image,
+                thumbnail_colour: item.data.thumbnail_colour,
+              });
+        });
+
+        this.props.UPDATE_WORK(items);
       });
     });
   }
+
+
+
+
 
 
   render() {
@@ -57,6 +78,10 @@ class Main extends Component {
             <Route path="/work" exact render={(props) => (
               <Work {...props} items={this.props.work} />
               )}/>
+            <Route path="/cats/:slug" exact render={(props) => (
+              <WorkItem {...props} items={this.props.work} />
+              )}/>
+
             <Route path="/contact" exact component={Contact} />
             <Route path="/" exact render={(props) => (
               <Home {...props} items={this.props.work} />
@@ -71,7 +96,7 @@ class Main extends Component {
 
 
 
-const mapStatesToProps = state => {
+const mapStateToProps = state => {
   return {
     work: state.portfolioItems
   }
@@ -79,10 +104,10 @@ const mapStatesToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    get_work: work => dispatch({type: actionTypes.GET_WORK, payload: work})
+    UPDATE_WORK: work => dispatch({type: actionTypes.UPDATE_WORK, payload: work})
   }
 }
 
 export default withRouter(
-                          connect(mapStatesToProps, mapDispatchToProps)(Main)
+                          connect(mapStateToProps, mapDispatchToProps)(Main)
                           );

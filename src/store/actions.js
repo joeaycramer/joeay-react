@@ -1,1 +1,1 @@
-export const GET_WORK = 'GET_WORK';
+export const UPDATE_WORK = 'UPDATE_WORK';

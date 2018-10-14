@@ -4,8 +4,7 @@ import Aux from '../../../hoc/Aux';
 import c from './PortfolioItem.scss';
 
 const PortfolioItem = (props) => {
-	let title = '';
-		title = props.title.split(' ').map(word => {
+	let title = props.title.split(' ').map(word => {
 		return (
 			<span key={word}>
 				{word}

@@ -22,13 +22,14 @@ const Work = (props) => {
 		Prismic.api(apiEndpoint).then(api => {
 			api.getByUID('portfolio', slug).then(response => {
 				
-				var storeCopy = props.items;
-				// storeCopy = response.data;
+        let items_copy = props.items, 
+            target_index = props.items.findIndex(item => item.slug === slug);
+      
+        items_copy[target_index] = response.data;
 
-				props.UPDATE_WORK(storeCopy);
+				props.UPDATE_WORK(items_copy);
 			});
 		});
-
 
 	} else {
 		// we got it full
@@ -39,7 +40,7 @@ const Work = (props) => {
 
   return (
     <Aux>
-    	<Title title="Issa item" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
+    	<Title title="cats" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
     </Aux>
   )
 }

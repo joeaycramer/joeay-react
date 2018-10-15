@@ -57,8 +57,16 @@ class Main extends Component {
                 thumbnail_image: item.data.thumbnail_image,
                 thumbnail_colour: item.data.thumbnail_colour,
               });
+
+            // items[item.uid] = {
+            //     slug: item.uid,
+            //     thumbnail_title: item.data.thumbnail_title,
+            //     thumbnail_image: item.data.thumbnail_image,
+            //     thumbnail_colour: item.data.thumbnail_colour,
+            //   };
         });
 
+        console.log(items);
         this.props.UPDATE_WORK(items);
       });
     });

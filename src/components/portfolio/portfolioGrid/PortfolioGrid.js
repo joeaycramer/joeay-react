@@ -8,15 +8,15 @@ const PortfolioGrid = (props) => {
 		<Loader />
 		);
 
-	if (props.items.length > 0) {
-    
-		items = props.items.map(item => {
+	if (Object.keys(props.items).length > 0) {
+
+		items = Object.keys(props.items).map((key, index) => {
 			return <PortfolioItem
-							key={item.slug}
-							title={item.thumbnail_title}
-							color={item.thumbnail_colour}
-							link={item.slug}
-							image={item.thumbnail_image.url} />
+							key={props.items[key].slug}
+							title={props.items[key].thumbnail_title}
+							color={props.items[key].thumbnail_colour}
+							link={props.items[key].slug}
+							image={props.items[key].thumbnail_image.url} />
 		});
 	}
 

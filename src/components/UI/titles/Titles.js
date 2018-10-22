@@ -3,13 +3,19 @@ import Aux from '../../../hoc/Aux';
 import c from './Titles.scss';
 
 const Titles = (props) => {
-	const subtitle = props.subtitle ? (<div className={c.subtitle}>{props.subtitle}</div>) : null;
+	const classes = {
+		title: `${c.title} ${props.loading ? c.loading : ''}`,
+		subtitle: `${c.subtitle} ${props.loading ? c.loading : ''}`
+	};
+
+	const subtitle = props.subtitle ? (<div className={classes.subtitle}>{props.subtitle}</div>) : null;
+
+
+
 
 	return (
 		<Aux>
-			<h1 className={c.title}>
-				{props.title}
-			</h1>
+			<h1 className={classes.title}>{props.title}</h1>
 
 			{subtitle}
 		</Aux>

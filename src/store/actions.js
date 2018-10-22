@@ -1,1 +1,2 @@
 export const UPDATE_WORK = 'UPDATE_WORK';
+export const UPDATE_SINGLE_WORK = 'UPDATE_SINGLE_WORK';

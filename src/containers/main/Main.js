@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import Prismic from 'prismic-javascript';
 import Home from '../../components/pages/Home';
 import Work from '../../components/pages/Work';
-import WorkItem from '../../components/pages/WorkItem';
+import SingleWorkHolder from '../../components/pages/singleWork/SingleWorkHolder';
 import Contact from '../../components/pages/Contact';
 
 import { connect } from 'react-redux';
@@ -57,6 +57,7 @@ class Main extends Component {
 							thumbnail_image: item.data.thumbnail_image,
 							thumbnail_colour: item.data.thumbnail_colour,
 						});
+						return true;
 					});
 
 					this.props.UPDATE_WORK(items);
@@ -74,15 +75,9 @@ class Main extends Component {
 
 		Prismic.api(apiEndpoint).then(api => {
 				api.getByUID('portfolio', slug).then(response => {
-					let items_copy = this.props.work,
-							target_index = this.props.work.findIndex(item => item.slug === slug);
-					
-					items_copy[target_index] = {
-						...this.props.work[target_index],
-						...response.data
-					};
+					let target_index = this.props.work.findIndex(item => item.slug === slug);
 
-					this.props.UPDATE_WORK(items_copy);
+					this.props.UPDATE_SINGLE_WORK(response.data, target_index);
 				});
 			});
 	}
@@ -100,7 +95,7 @@ class Main extends Component {
 				<Work {...props} items={this.props.work} />
 				)}/>
 			<Route path="/cats/:slug" exact render={(props) => (
-				<WorkItem {...props} items={this.props.work} getItem={(e) => this.loadPortfolioItem(e)} />
+				<SingleWorkHolder {...props} items={this.props.work} getItem={(e) => this.loadPortfolioItem(e)} />
 				)}/>
 
 			<Route path="/contact" exact component={Contact} />
@@ -116,7 +111,6 @@ class Main extends Component {
 }
 
 
-
 const mapStateToProps = state => {
 	return {
 		work: state.portfolioItems
@@ -125,7 +119,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		UPDATE_WORK: work => dispatch({type: actionTypes.UPDATE_WORK, payload: work})
+		UPDATE_WORK: work => dispatch({type: actionTypes.UPDATE_WORK, payload: work}),
+		UPDATE_SINGLE_WORK: (item, target_index) => dispatch({type: actionTypes.UPDATE_SINGLE_WORK, item: item, target_index: target_index}),
 	}
 }
 

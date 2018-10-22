@@ -8,48 +8,45 @@ import * as actionTypes from '../../store/actions';
 
 // import PortfolioGrid from '../portfolio/portfolioGrid/PortfolioGrid';
 
-
-
-// basically go get the single work, then replace the one in the store with the one u got
-// new store var of the spread old store, 
-
 const Work = (props) => {
 	const slug = props.match.params.slug;
 
-	if ( !props.items[slug] || (props.items[slug] && !props.items[slug]['complete']) ) {
-		const apiEndpoint = 'https://joeaycouk.cdn.prismic.io/api/v2';
+	console.log('some check', props.items.some(item => item.slug === slug));
 
-		Prismic.api(apiEndpoint).then(api => {
-			api.getByUID('portfolio', slug).then(response => {
-				
-        let items_copy = props.items, 
-            target_index = props.items.findIndex(item => item.slug === slug);
-      
-        items_copy[target_index] = response.data;
+	if (!props.items.length){
+		//  404
+		console.log('items not ready');
+	} else if (props.items.length && !props.items.some(item => item.slug === slug)) {
+		console.log('item doesnt exist');
+	} else if (props.items.length && props.items.some(item => item.slug === slug)) {
+		console.log('item exits');
+		
+		var itemIndex = props.items.findIndex(item => item.slug === slug),
+		item = props.items.find(item => item.slug === slug);
 
-				props.UPDATE_WORK(items_copy);
-			});
-		});
+		if (item['title']) {
+			console.log('we got full deetz already');
+		} else {
+			console.log('getting full deetz');
 
-	} else {
-		// we got it full
+			this.props.loadItem(slug);
+		}
+
 	}
 
-  
 
-
-  return (
-    <Aux>
-    	<Title title="cats" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
-    </Aux>
-  )
+	return (
+		<Aux>
+		<Title title="" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
+		</Aux>
+		)
 }
 
 
 const mapDispatchToProps = dispatch => {
-  return {
-    UPDATE_WORK: work => dispatch({type: actionTypes.UPDATE_WORK, payload: work})
-  }
+	return {
+		UPDATE_WORK: work => dispatch({type: actionTypes.UPDATE_WORK, payload: work})
+	}
 }
 
 export default connect(null, mapDispatchToProps)(Work);

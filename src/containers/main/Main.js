@@ -69,16 +69,16 @@ class Main extends Component {
 
 
 	loadPortfolioItem = (slug) => {
-		console.log('loading item');
+		console.log('loading item', slug);
 		const apiEndpoint = 'https://joeaycouk.cdn.prismic.io/api/v2';
 
 		Prismic.api(apiEndpoint).then(api => {
 				api.getByUID('portfolio', slug).then(response => {
-					let items_copy = this.props.items,
-							target_index = this.props.items.findIndex(item => item.slug === slug);
+					let items_copy = this.props.work,
+							target_index = this.props.work.findIndex(item => item.slug === slug);
 					
 					items_copy[target_index] = {
-						...this.props.items[target_index],
+						...this.props.work[target_index],
 						...response.data
 					};
 
@@ -100,7 +100,7 @@ class Main extends Component {
 				<Work {...props} items={this.props.work} />
 				)}/>
 			<Route path="/cats/:slug" exact render={(props) => (
-				<WorkItem {...props} items={this.props.work} getItem={() => this.loadPortfolioItem()} />
+				<WorkItem {...props} items={this.props.work} getItem={(e) => this.loadPortfolioItem(e)} />
 				)}/>
 
 			<Route path="/contact" exact component={Contact} />

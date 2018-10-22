@@ -11,8 +11,6 @@ import * as actionTypes from '../../store/actions';
 const Work = (props) => {
 	const slug = props.match.params.slug;
 
-	console.log('some check', props.items.some(item => item.slug === slug));
-
 	if (!props.items.length){
 		//  404
 		console.log('items not ready');
@@ -27,9 +25,8 @@ const Work = (props) => {
 		if (item['title']) {
 			console.log('we got full deetz already');
 		} else {
-			console.log('getting full deetz');
-
-			this.props.loadItem(slug);
+			console.log('getting full deetz from prismic');
+			props.getItem(slug);
 		}
 
 	}
@@ -37,7 +34,7 @@ const Work = (props) => {
 
 	return (
 		<Aux>
-		<Title title="" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
+		<Title title="woof" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
 		</Aux>
 		)
 }

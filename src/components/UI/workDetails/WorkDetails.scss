@@ -1,0 +1,15 @@
+.flexRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailCard {
+  text-align: center;
+  font-size: 25px;
+  flex-grow: 1;
+
+  &__title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+}

@@ -91,13 +91,12 @@ class Main extends Component {
 			<div className={c_l.container}>
 
 			<Switch>
+			<Route path="/work/:slug" exact render={(props) => (
+				<SingleWorkHolder {...props} items={this.props.work} getItem={(e) => this.loadPortfolioItem(e)} />
+				)}/>
 			<Route path="/work" exact render={(props) => (
 				<Work {...props} items={this.props.work} />
 				)}/>
-			<Route path="/cats/:slug" exact render={(props) => (
-				<SingleWorkHolder {...props} items={this.props.work} getItem={(e) => this.loadPortfolioItem(e)} />
-				)}/>
-
 			<Route path="/contact" exact component={Contact} />
 			<Route path="/" exact render={(props) => (
 				<Home {...props} items={this.props.work} />

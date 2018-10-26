@@ -15,7 +15,7 @@ const PortfolioItem = (props) => {
 	return (
 		<Aux>
 			<div className={c.item}>
-				<Link to={'/cats/' + props.link}>
+				<Link to={'/work/' + props.link}>
 					<div className={c.colorOverlay} style={{backgroundColor: props.color }}></div>
 					<div className={c.image} style={{backgroundImage: `url(${props.image})`}}></div>
 					<div className={c.title}>

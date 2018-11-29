@@ -1,8 +1,9 @@
 import React from "react";
 
 const ShowcaseImage = props => {
-  console.log(props.details);
-  return <div />;
+  const details = props.details;
+  console.log("showcase", props);
+  return <img src={details.image} width="100%" />;
 };
 
 export default ShowcaseImage;

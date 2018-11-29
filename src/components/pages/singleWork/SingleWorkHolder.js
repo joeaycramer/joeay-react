@@ -8,19 +8,18 @@ const SingleWorkHolder = props => {
   let content = <SingleWorkLoader />;
 
   if (!props.items.length) {
-    //  404
     // console.log('items are not ready');
   } else if (
     props.items.length &&
     !props.items.some(item => item.slug === slug)
   ) {
+    //  404
     // console.log('item doesn\'t exist');
   } else if (
     props.items.length &&
     props.items.some(item => item.slug === slug)
   ) {
     // console.log('item exits in the items list');
-
     let item = props.items.find(item => item.slug === slug);
 
     if (item["title"]) {

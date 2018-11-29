@@ -8,16 +8,15 @@ import ShowcaseImage from "../../UI/ShowcaseImage/ShowcaseImage";
 
 const SingleWork = props => {
   const item = props.item;
-  const showcase_datas =
+  const showcaseImages = item.showcaseImages.map(details => {
+    return <ShowcaseImage details={details} />;
+  });
 
   return (
     <Aux>
-      <Title
-        title={item["title"]}
-        subtitle={<p>{props.item["description"][0]["text"]}</p>}
-      />
+      <Title title={item.title} subtitle={<p>{props.item.description}</p>} />
       <WorkDetails details={item} />
-      <ShowcaseImage details={item.body} />
+      {showcaseImages}
     </Aux>
   );
 };

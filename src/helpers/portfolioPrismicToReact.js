@@ -15,8 +15,6 @@ const portfolioPrismicToReact = item => {
     };
   });
 
-  delete item.data.body;
-
   const transformedData = {
     ...item.data,
     ...thumbnailFixer,
@@ -24,6 +22,10 @@ const portfolioPrismicToReact = item => {
     description: item.data.description[0].text,
     task: item.data.task[0].text
   };
+
+  delete transformedData.body;
+
+  console.log(transformedData);
 
   return transformedData;
 };

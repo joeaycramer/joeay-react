@@ -1,0 +1,15 @@
+.Row {
+  display: flex;
+  margin: 30px 0;
+  max-width: 1000px;
+  padding: 10px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.LargeQuote {
+  background: #000;
+}

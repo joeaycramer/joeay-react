@@ -8,14 +8,14 @@ const ShowcaseImage = props => {
   return (
     <div className={c.Row}>
       {details.large_quote.length ? (
-        <div className={c.Col}>
-          <p className={c.LargeQuote}>{details.large_quote}</p>
+        <div className={(c.Col, c.LargeQuote)}>
+          <p>{details.large_quote}</p>
         </div>
       ) : (
         ""
       )}
-      <div className={c.Col}>
-        <LazyLoad height="300">
+      <div className={c.ShowcaseImage}>
+        <LazyLoad height="400" once="true">
           {details.caption.length ? (
             <p className={c.Caption}>{details.caption}</p>
           ) : (

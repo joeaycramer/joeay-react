@@ -15,6 +15,12 @@
     width: 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   }
+
+  &.NoShadow {
+    img {
+      box-shadow: none;
+    }
+  }
 }
 
 .LargeQuote {
@@ -31,7 +37,7 @@
 .Caption {
   font-size: 16px;
   text-align: right;
-  color: #666;
+  color: #888;
   margin-bottom: 5px;
   max-width: 80%;
   float: right;

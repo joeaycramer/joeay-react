@@ -11,7 +11,8 @@ const portfolioPrismicToReact = item => {
       image: slice.primary.image.url,
       large_quote: slice.primary.large_quote.length
         ? slice.primary.large_quote[0].text
-        : false
+        : false,
+      remove_shadow: slice.primary.shadow == "yes" ? true : false
     };
   });
 

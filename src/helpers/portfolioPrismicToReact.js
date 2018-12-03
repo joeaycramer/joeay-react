@@ -12,7 +12,7 @@ const portfolioPrismicToReact = item => {
       large_quote: slice.primary.large_quote.length
         ? slice.primary.large_quote[0].text
         : false,
-      remove_shadow: slice.primary.shadow == "yes" ? true : false
+      remove_shadow: slice.primary.shadow === "yes" ? true : false
     };
   });
 
@@ -25,8 +25,6 @@ const portfolioPrismicToReact = item => {
   };
 
   delete transformedData.body;
-
-  console.log(transformedData);
 
   return transformedData;
 };

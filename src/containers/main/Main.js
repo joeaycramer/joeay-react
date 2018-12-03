@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { withRouter } from "react-router";
-import Prismic from "prismic-javascript";
 import Home from "../../components/pages/Home";
 import Work from "../../components/pages/Work";
 import SingleWorkHolder from "../../components/pages/singleWork/SingleWorkHolder";
 import Contact from "../../components/pages/Contact";
 import ThumbnailHelper from "../../helpers/thumbnailPrismicToReact";
 import portfolioDataHelper from "../../helpers/portfolioPrismicToReact";
+
+import Prismic from "../../services/prismic/portfolio";
 
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actions";
@@ -16,57 +18,34 @@ import c from "./Main.scss";
 import c_l from "../layout/Layout.scss";
 
 class Main extends Component {
-  componentWillMount = () => {
-    if (!this.props.work.length) {
-      this.getPortfolioItems();
-    }
-  };
-
-  // shouldComponentUpdate = (nextProps, nextState) => {
-  //     return true;
-  // }
-
-  componentDidUpdate = prevProps => {
+  componentDidUpdate = () => {
     window.scrollTo(0, 0);
   };
 
-  // get base portfolio items
-  getPortfolioItems = () => {
-    const apiEndpoint = "https://joeaycouk.cdn.prismic.io/api/v2";
+  componentDidMount = () => {
+    this.getInitialThumbnails();
+  };
 
-    Prismic.api(apiEndpoint).then(api => {
-      api
-        .query(Prismic.Predicates.at("document.type", "portfolio"), {
-          fetch: [
-            "portfolio.thumbnail_title",
-            "portfolio.thumbnail_image",
-            "portfolio.thumbnail_colour"
-          ],
-          orderings: "[my.portfolio.date_completed desc]"
-        })
-        .then(response => {
-          const items = response.results.map(item => {
-            return ThumbnailHelper(item);
-          });
+  getSingleWork = slug => {
+    const prismic = new Prismic();
+    prismic.getSingleWork(slug).then(response => {
+      const target_index = this.props.work.findIndex(
+        item => item.slug === slug
+      );
+      const portfolioFixer = portfolioDataHelper(response);
 
-          this.props.UPDATE_WORK(items);
-        });
+      this.props.UPDATE_SINGLE_WORK(portfolioFixer, target_index);
     });
   };
 
-  loadPortfolioItem = slug => {
-    const apiEndpoint = "https://joeaycouk.cdn.prismic.io/api/v2";
-
-    Prismic.api(apiEndpoint).then(api => {
-      api.getByUID("portfolio", slug).then(response => {
-        let target_index = this.props.work.findIndex(
-          item => item.slug === slug
-        );
-
-        const portfolioFixer = portfolioDataHelper(response);
-
-        this.props.UPDATE_SINGLE_WORK(portfolioFixer, target_index);
+  getInitialThumbnails = () => {
+    const prismic = new Prismic();
+    prismic.getInititalThumbnails().then(response => {
+      const items = response.results.map(item => {
+        return ThumbnailHelper(item);
       });
+
+      this.props.UPDATE_WORK(items);
     });
   };
 
@@ -74,30 +53,39 @@ class Main extends Component {
     return (
       <main className={c.main}>
         <div className={c_l.container}>
-          <Switch>
-            <Route
-              path="/work/:slug"
-              exact
-              render={props => (
-                <SingleWorkHolder
-                  {...props}
-                  items={this.props.work}
-                  getItem={e => this.loadPortfolioItem(e)}
+          <TransitionGroup>
+            {/* no different than other usage of
+                CSSTransition, just make sure to pass
+                `location` to `Switch` so it can match
+                the old location as it animates out
+            */}
+            <CSSTransition key={Math.random()} classNames="fade" timeout={5000}>
+              <Switch>
+                <Route
+                  path="/work/:slug"
+                  exact
+                  render={props => (
+                    <SingleWorkHolder
+                      {...props}
+                      items={this.props.work}
+                      getItem={e => this.getSingleWork(e)}
+                    />
+                  )}
                 />
-              )}
-            />
-            <Route
-              path="/work"
-              exact
-              render={props => <Work {...props} items={this.props.work} />}
-            />
-            <Route path="/contact" exact component={Contact} />
-            <Route
-              path="/"
-              exact
-              render={props => <Home {...props} items={this.props.work} />}
-            />
-          </Switch>
+                <Route
+                  path="/work"
+                  exact
+                  render={props => <Work {...props} items={this.props.work} />}
+                />
+                <Route path="/contact" exact component={Contact} />
+                <Route
+                  path="/"
+                  exact
+                  render={props => <Home {...props} items={this.props.work} />}
+                />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
         </div>
       </main>
     );

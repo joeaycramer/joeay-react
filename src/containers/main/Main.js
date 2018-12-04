@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { withRouter } from "react-router";
 import Home from "../../components/pages/Home";
 import Work from "../../components/pages/Work";
@@ -18,7 +18,7 @@ import c from "./Main.scss";
 import c_l from "../layout/Layout.scss";
 
 class Main extends Component {
-  componentDidUpdate = () => {
+  componentWillUpdate = () => {
     window.scrollTo(0, 0);
   };
 
@@ -54,13 +54,20 @@ class Main extends Component {
       <main className={c.main}>
         <div className={c_l.container}>
           <TransitionGroup>
-            {/* no different than other usage of
-                CSSTransition, just make sure to pass
-                `location` to `Switch` so it can match
-                the old location as it animates out
-            */}
-            <CSSTransition key={Math.random()} classNames="fade" timeout={5000}>
-              <Switch>
+            <CSSTransition
+              key={this.props.location.pathname}
+              timeout={{ enter: 300000, exit: 300000 }}
+              classNames={{
+                appear: c.FadeAppear,
+                appearActive: c.FadeAppearActive,
+                enter: c.FadeEnter,
+                enterActive: c.FadeEnterActive,
+                exit: c.FadeExit,
+                exitActive: c.FadeExitActive
+              }}
+              exit={true}
+            >
+              <Switch location={this.props.location}>
                 <Route
                   path="/work/:slug"
                   exact

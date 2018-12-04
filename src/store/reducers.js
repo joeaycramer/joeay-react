@@ -1,5 +1,4 @@
 import * as actionTypes from "./actions";
-import portfolioDataHelper from "../helpers/portfolioPrismicToReact";
 
 const initialState = {
   portfolioItems: []
@@ -36,7 +35,7 @@ const reducer = (state = initialState, action) => {
         ...state
       };
   }
-  return state;
+  // return state;
 };
 
 export default reducer;

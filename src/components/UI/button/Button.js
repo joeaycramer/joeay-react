@@ -1,12 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import c from "./Button.scss";
 
-const Button = (props) => {
+const Button = props => {
   return (
-    <Link className="button" to={props.link}>
-    	{props.children}
+    <Link className={c.Button} to={props.link}>
+      {props.children}
     </Link>
-  )
-}
+  );
+};
 
 export default Button;

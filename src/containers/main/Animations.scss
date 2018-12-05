@@ -1,0 +1,32 @@
+.FadeEnter {
+  opacity: 0;
+  top: 10px;
+}
+
+.FadeEnter.FadeEnterActive {
+  opacity: 1;
+  position: relative;
+  top: 0;
+  transition: all 150ms ease-in 150ms;
+}
+
+.FadeExit {
+  opacity: 1;
+  position: absolute !important;
+  top: 66px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1200px;
+  width: 100%;
+  z-index: 5;
+}
+
+.FadeExit.FadeExitActive {
+  opacity: 0;
+  top: 76px;
+  transition: all 150ms ease-in;
+}
+
+.TransitionContainer {
+  position: relative;
+}

@@ -24,7 +24,7 @@ const SingleWorkHolder = props => {
 
     if (item["title"]) {
       // console.log('we already have the full details');
-      content = <SingleWork item={item} />;
+      content = <SingleWork {...props} item={item} />;
     } else {
       // console.log('we need to get full details from prismic');
       props.getItem(slug);

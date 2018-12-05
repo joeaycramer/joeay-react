@@ -3,11 +3,13 @@ import Title from "../UI/titles/Titles";
 import Button from "../UI/button/Button";
 import BoxedImageAndText from "../UI/boxedImageAndText/boxedImageAndText";
 import PortfolioGrid from "../portfolio/portfolioGrid/PortfolioGrid";
+import Aux from "../../hoc/Aux";
 
 const Home = props => {
   const fourItems = props.items.slice(0, 4);
+
   return (
-    <div>
+    <Aux>
       <Title title="ABOUT ME" />
 
       <BoxedImageAndText image="https://prismic-io.s3.amazonaws.com/joeaycouk%2F6cde8cd8-d0db-4404-be91-091e305ff5f8_img_8511-compressed.jpg">
@@ -30,11 +32,10 @@ const Home = props => {
       </BoxedImageAndText>
 
       <Title title="WORK" />
-
       <PortfolioGrid items={fourItems} />
 
       <Button link="/work">See all</Button>
-    </div>
+    </Aux>
   );
 };
 

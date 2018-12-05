@@ -1,16 +1,18 @@
 import React from "react";
 import Title from "../UI/titles/Titles";
 
-const Contact = () => {
+const Contact = props => {
   return (
-    <Title
-      title="Contact"
-      subtitle={
-        <p>
-          <a href="mailto:hello@joeay.co.uk">hello@joeay.co.uk</a>, easy.
-        </p>
-      }
-    />
+    <div>
+      <Title
+        title="Contact"
+        subtitle={
+          <p>
+            <a href="mailto:hello@joeay.co.uk">hello@joeay.co.uk</a>, easy.
+          </p>
+        }
+      />
+    </div>
   );
 };
 

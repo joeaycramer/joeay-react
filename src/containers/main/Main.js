@@ -6,6 +6,8 @@ import Home from "../../components/pages/Home";
 import Work from "../../components/pages/Work";
 import SingleWorkHolder from "../../components/pages/singleWork/SingleWorkHolder";
 import Contact from "../../components/pages/Contact";
+import NotFound from "../../components/pages/404";
+
 import ThumbnailHelper from "../../helpers/thumbnailPrismicToReact";
 import portfolioDataHelper from "../../helpers/portfolioPrismicToReact";
 
@@ -16,6 +18,7 @@ import * as actionTypes from "../../store/actions";
 
 import c from "./Main.scss";
 import c_l from "../layout/Layout.scss";
+import c_a from "./Animations.scss";
 
 class Main extends Component {
   componentWillUpdate = () => {
@@ -56,41 +59,47 @@ class Main extends Component {
           <TransitionGroup>
             <CSSTransition
               key={this.props.location.pathname}
-              timeout={{ enter: 300000, exit: 300000 }}
               classNames={{
-                appear: c.FadeAppear,
-                appearActive: c.FadeAppearActive,
-                enter: c.FadeEnter,
-                enterActive: c.FadeEnterActive,
-                exit: c.FadeExit,
-                exitActive: c.FadeExitActive
+                enter: c_a.FadeEnter,
+                enterActive: c_a.FadeEnterActive,
+                exit: c_a.FadeExit,
+                exitActive: c_a.FadeExitActive
               }}
-              exit={true}
+              timeout={300}
+              mountOnEnter={true}
+              unmountOnExit={true}
             >
-              <Switch location={this.props.location}>
-                <Route
-                  path="/work/:slug"
-                  exact
-                  render={props => (
-                    <SingleWorkHolder
-                      {...props}
-                      items={this.props.work}
-                      getItem={e => this.getSingleWork(e)}
-                    />
-                  )}
-                />
-                <Route
-                  path="/work"
-                  exact
-                  render={props => <Work {...props} items={this.props.work} />}
-                />
-                <Route path="/contact" exact component={Contact} />
-                <Route
-                  path="/"
-                  exact
-                  render={props => <Home {...props} items={this.props.work} />}
-                />
-              </Switch>
+              <section className={c_a.TransitionContainer}>
+                <Switch location={this.props.location}>
+                  <Route
+                    path="/work/:slug"
+                    exact
+                    render={props => (
+                      <SingleWorkHolder
+                        {...props}
+                        items={this.props.work}
+                        getItem={e => this.getSingleWork(e)}
+                      />
+                    )}
+                  />
+                  <Route
+                    path="/work"
+                    exact
+                    render={props => (
+                      <Work {...props} items={this.props.work} />
+                    )}
+                  />
+                  <Route path="/contact" exact component={Contact} />
+                  <Route
+                    path="/"
+                    exact
+                    render={props => (
+                      <Home {...props} items={this.props.work} />
+                    )}
+                  />
+                  <Route component={NotFound} />
+                </Switch>
+              </section>
             </CSSTransition>
           </TransitionGroup>
         </div>

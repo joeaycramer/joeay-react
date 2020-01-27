@@ -4509,7 +4509,7 @@ node-pre-gyp@^0.6.29:
     request "^2.81.0"
     rimraf "^2.6.1"
     semver "^5.3.0"
-    tar "^2.2.1"
+    tar "^2.2.2"
     tar-pack "^3.4.0"
 
 node-pre-gyp@^0.6.36:
@@ -4524,7 +4524,7 @@ node-pre-gyp@^0.6.36:
     request "2.81.0"
     rimraf "^2.6.1"
     semver "^5.3.0"
-    tar "^2.2.1"
+    tar "^2.2.2"
     tar-pack "^3.4.0"
 
 node-status-codes@^1.0.0:
@@ -6343,7 +6343,7 @@ tar-pack@^3.4.0:
     once "^1.3.3"
     readable-stream "^2.1.4"
     rimraf "^2.5.1"
-    tar "^2.2.1"
+    tar "^2.2.2"
     uid-number "^0.0.6"
 
 tar@^2.2.1:

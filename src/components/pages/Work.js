@@ -6,9 +6,9 @@ import PortfolioGrid from '../portfolio/portfolioGrid/PortfolioGrid';
 const Work = (props) => {
   return (
     <Aux>
-    	<Title title="WORK" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
-    	
-    	<PortfolioGrid items={props.items} />
+      <Title title="WORK" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
+
+      <PortfolioGrid items={props.items} />
     </Aux>
   )
 }

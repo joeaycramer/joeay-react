@@ -1,5 +1,5 @@
 import React from "react";
-import c from "./showcaseImage.scss";
+import c from "./ShowcaseImage.scss";
 import LazyLoad from "react-lazyload";
 
 const ShowcaseImage = props => {

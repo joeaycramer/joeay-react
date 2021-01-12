@@ -165,16 +165,16 @@ p {
       display: inline-block;
       position: absolute;
       bottom: 5px;
-      left: -4px;
+      left: -2px;
       height: 12px;
-      width: 50%;
+      width: 70%;
       background: rgba(#a33039, 0.3);
 
       transition: 0.3s;
     }
 
     &:hover:after {
-      width: calc(100% + 8px);
+      width: calc(100% + 4px);
       background: rgba(#a33039, 0.5);
     }
   }

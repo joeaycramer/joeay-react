@@ -1,5 +1,5 @@
 import React from 'react';
-import c from './boxedImageAndText.scss';
+import c from './BoxedImageAndText.scss';
 
 const boxedImageAndText = (props) => {
 	return (

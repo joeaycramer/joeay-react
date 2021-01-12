@@ -1,5 +1,5 @@
 import React from 'react';
-import Aux from '../../hoc/Aux';
+
 import Title from '../UI/titles/Titles';
 import Prismic from 'prismic-javascript';
 
@@ -33,9 +33,9 @@ const Work = (props) => {
 
 
 	return (
-		<Aux>
+		<React.Fragment>
 		<Title title="woof" subtitle={(<p>Check out a selection of some of my favourite pieces of work, some private, some for agencies</p>)} />
-		</Aux>
+		</React.Fragment>
 		)
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Aux from "../../../hoc/Aux";
 import c from "./Titles.scss";
 
 const Titles = props => {
@@ -13,11 +12,11 @@ const Titles = props => {
   ) : null;
 
   return (
-    <Aux>
+    <React.Fragment>
       <h1 className={classes.title}>{props.title}</h1>
 
       {subtitle}
-    </Aux>
+    </React.Fragment>
   );
 };
 

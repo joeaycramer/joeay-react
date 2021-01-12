@@ -5,7 +5,11 @@
   position: relative;
   z-index: 5;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 0 20px;
+
+  @media (min-width: 540px) {
+    margin: 0 auto;
+  }
 
   @media (min-width: 768px) {
     flex-direction: row;

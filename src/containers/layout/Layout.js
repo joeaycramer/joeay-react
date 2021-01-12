@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Aux from "../../hoc/Aux";
 import Header from "../../components/layout/header/Header";
 import Main from "../../containers/main/Main";
 import Footer from "../../components/layout/footer/Footer";
@@ -21,11 +20,11 @@ class Layout extends Component {
 
   render() {
     return (
-      <Aux>
+      <React.Fragment>
         <Header nav={this.state.nav} />
         <Main />
         <Footer />
-      </Aux>
+      </React.Fragment>
     );
   }
 }

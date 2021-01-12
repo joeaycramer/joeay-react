@@ -1,9 +1,9 @@
-import React from 'react';
-import c from './Footer.scss';
+import React from 'react'
+import c from './Footer.scss'
 
 const Footer = (props) => {
-	const d = new Date();
-	const year = d.getFullYear(); 
+	const d = new Date()
+	const year = d.getFullYear();
 
 	return (
 		<div className={c.footer}>
@@ -14,4 +14,4 @@ const Footer = (props) => {
 	)
 }
 
-export default Footer;
+export default Footer

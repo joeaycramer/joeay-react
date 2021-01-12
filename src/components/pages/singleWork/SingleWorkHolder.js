@@ -1,5 +1,5 @@
 import React from "react";
-import Aux from "../../../hoc/Aux";
+
 import SingleWorkLoader from "./SingleWorkLoader";
 import SingleWork from "./SingleWork";
 
@@ -31,7 +31,7 @@ const SingleWorkHolder = props => {
     }
   }
 
-  return <Aux>{content}</Aux>;
+  return <React.Fragment>{content}</React.Fragment>;
 };
 
 export default SingleWorkHolder;

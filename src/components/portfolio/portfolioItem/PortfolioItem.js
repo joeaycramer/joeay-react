@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Aux from '../../../hoc/Aux';
 import c from './PortfolioItem.scss';
 
 const PortfolioItem = (props) => {
@@ -13,7 +12,7 @@ const PortfolioItem = (props) => {
 	});
 
 	return (
-		<Aux>
+		<React.Fragment>
 			<div className={c.item}>
 				<Link to={'/work/' + props.link}>
 					<div className={c.colorOverlay} style={{backgroundColor: props.color }}></div>
@@ -24,7 +23,7 @@ const PortfolioItem = (props) => {
 				</Link>
 			</div>
 
-		</Aux>
+		</React.Fragment>
 		)
 }
 

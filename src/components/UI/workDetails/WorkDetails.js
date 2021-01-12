@@ -1,10 +1,10 @@
 import React from "react";
 import c from "./WorkDetails.scss";
-import Aux from "../../../hoc/Aux";
+
 
 const WorkDetails = props => {
   return (
-    <Aux>
+    <React.Fragment>
       <div className={c.flexRow}>
         <div className={c.detailCard}>
           <p className={c.detailCard__title}>Role</p>
@@ -28,7 +28,7 @@ const WorkDetails = props => {
           <p>{props.details.task}</p>
         </div>
       </div>
-    </Aux>
+    </React.Fragment>
   );
 };
 

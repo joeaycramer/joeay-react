@@ -8,7 +8,7 @@
     "js-cookie": "^2.2.0",
     "prismic-javascript": "^1.4.1",
     "prismic-reactjs": "^0.2.0",
-    "qs": "^6.4.0",
+    "qs": "^6.5.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "~4.2.2",
